@@ -122,6 +122,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getPosts } from "../services/api";
+import CircularIndeterminate from "../components/progressbar";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -156,7 +157,12 @@ const Home = () => {
   }, [searchQuery, posts]);
 
   if (loading) {
-    return <div className="text-center text-2xl mt-8">Loading...</div>;
+    return (
+      <div className="text-center text-2xl mt-8">
+        {" "}
+        <CircularIndeterminate />
+      </div>
+    );
   }
 
   return (
