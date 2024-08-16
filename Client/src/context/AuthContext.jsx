@@ -7,8 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    console.log( "clg dfrom auth",token);
+    const token = localStorage.getItem('token'); 
     if (token) {
       // TODO: Implement token verification
       setUser({ token });
