@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 exports.register = async (req, res) => {
-    const { username, password } = req.body;
-
+    const { name, username, password } = req.body;
+//    console.log(name)
     try {
         let user = await User.findOne({ username });
 
@@ -12,16 +12,18 @@ exports.register = async (req, res) => {
             return res.status(400).json({ msg: 'User already exists' });
         }
 
-        user = new User({ username, password });
+        user = new User({ name,username, password });
 
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
 
         await user.save();
 
+        //  console.log(user)
         const payload = {
             user: {
                 id: user.id,
+                name: user.name
             },
         };
 
@@ -31,7 +33,7 @@ exports.register = async (req, res) => {
             { expiresIn: '1h' },
             (err, token) => {
                 if (err) throw err;
-                res.json({ token });
+                res.json({ token , user});
             }
         );
     } catch (err) {
@@ -45,6 +47,7 @@ exports.login = async (req, res) => {
 
     try {
         let user = await User.findOne({ username });
+        console.log(user)
 
         if (!user) {
             return res.status(400).json({ msg: 'Invalid credentials' });
@@ -59,6 +62,7 @@ exports.login = async (req, res) => {
         const payload = {
             user: {
                 id: user.id,
+                name:user.name
             },
         };
 
@@ -68,7 +72,7 @@ exports.login = async (req, res) => {
             { expiresIn: '1h' },
             (err, token) => {
                 if (err) throw err;
-                res.json({ token });
+                res.json({ token , user});
             }
         );
     } catch (err) {

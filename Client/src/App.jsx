@@ -7,9 +7,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import CreatePost from './pages/CreatePost';
 import PostPage from './pages/PostPage'; 
-import { AuthProvider } from './context/AuthContext';
-import ProfilePage from './pages/Profilepage';
-
+import { AuthProvider } from './context/AuthContext'; 
+import ProfilePage from './pages/ProfilePage'
+import EditPostPage from './pages/EditPostPage';
 function App() {
   return (
     <AuthProvider>
@@ -24,6 +24,7 @@ function App() {
               <Route path="/create-post" element={<CreatePost />} />
               <Route path="/post/:id" element={<PostPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/edit-post/:id" element={<EditPostPage />} />
             </Routes>
           </main>
           <Footer />

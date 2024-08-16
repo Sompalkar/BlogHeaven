@@ -5,6 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 
 const Register = () => {
   const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await register(username, password);
+      const response = await register( name,username, password);
       login(response.data.token);
       navigate("/");
     } catch (error) {
@@ -26,6 +27,19 @@ const Register = () => {
       <h1 className="text-3xl font-semibold mb-6">Register</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="name" className="block mb-1">
+            Full Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full px-3 py-2 border rounded-md"
+            required
+          />
+        </div>
         <div>
           <label htmlFor="username" className="block mb-1">
             Username
