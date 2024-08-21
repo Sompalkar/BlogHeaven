@@ -4,7 +4,7 @@ Blog Haven is a full-stack web application that allows users to create, read, up
 
 ## Features
 
-- User authentication (register, login, logout)
+- User authentication (register, login, logout) 
 - Create, read, update, and delete blog posts
 - Responsive design for mobile and desktop
 - User profiles with personal post management
